@@ -10,7 +10,7 @@
 *macOS Only*
 
 * [Now Playing](#Now-Playing-Apple-Music "Now Playing (Apple Music)")
-* [Listen](#Listen "Listen")
+* [Listen](#Listen-Apple-Music "Listen (Apple Music)")
 * [Apple Music Snippets](#Apple-Music-Snippets "Apple Music Snippets")
 
 #### YouTube (without ads)
@@ -130,7 +130,7 @@ np() {
 }
 ```
 
-#### Listen
+#### Listen (Apple Music)
 Call this script to begin playback of a specified song, album, songs from a specific artist, or songs from a specific playlist.  This is dictated by the flag you pass.  Unfortunately there is no simple way to play a specific album or songs from a specific artist with Applescript, but I was able to modify code shared by a "jccc" [here](https://discussions.apple.com/thread/1053355), which involves creating a temporary playlist.
 
 Configuration: 
