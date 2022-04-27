@@ -133,6 +133,10 @@ np() {
 #### Listen
 Call this script to begin playback of a specified song, album, songs from a specific artist, or songs from a specific playlist.  This is dictated by the flag you pass.  Unfortunately there is no simple way to play a specific album or songs from a specific artist with Applescript, but I was able to modify code shared by a "jccc" [here](https://discussions.apple.com/thread/1053355), which involves creating a temporary playlist.
 
+Configuration: 
+
+* Remove calls to `np` if you don't have my Now Playing script aliased
+
 Usage: `listen -s House of Cards`, `listen -r In Rainbows`, `listen -a Radiohead`, `listen -p Radiohead Essentials`
 
 ```ZSH
