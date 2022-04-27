@@ -7,7 +7,7 @@
 
 * [YouTube](#YouTube-without-ads "YouTube (without ads)")
 
-*macOS*
+*macOS Only*
 
 * [Now Playing](#Now-Playing-Apple-Music "Now Playing (Apple Music)")
 
@@ -54,7 +54,7 @@ yt() {
 
 <img src="images/nowplaying.png" width="400"/>
 
-Enjoy a Now Playing "widget" from your terminal.  Uses standard Unix tooling/piping, Applescript for interfacing with Apple Music, Spark for the progress bar, and Viu for displaying the album art images.  Pairs well with the additional Apple Music scripts I've included here.
+Enjoy a Now Playing "widget" from your terminal.  Uses standard Unix tooling/piping, Applescript for interfacing with Apple Music, [Spark](https://github.com/holman/spark) for the progress bar, and [Viu](https://github.com/atanunq/viu) for displaying the album art images.  Pairs well with the additional Apple Music scripts I've included here.
 
 Dependencies: [Spark](https://github.com/holman/spark), [Viu](https://github.com/atanunq/viu), [Doug's album-art.applescript](https://dougscripts.com/itunes/2014/10/save-current-tracks-artwork/)
 
