@@ -10,11 +10,12 @@
 *macOS Only*
 
 * [Now Playing](#Now-Playing-Apple-Music "Now Playing (Apple Music)")
+* [Apple Music Snippets](#Apple-Music-Snippets "Apple Music Snippets")
 
 #### YouTube (without ads)
 Uses DDG w/ params to force YouTube video results from your query, and plays the results you select w/ [MPV](https://github.com/mpv-player/mpv) or continuously queries depending on your subsequent input.  Could easily be reconfigured for use with [Lynx](http://lynx.browser.org), [w3m](http://w3m.sourceforge.net), etc. instead of [ddgr](https://github.com/jarun/ddgr).
 
-e.g. `yt portal 2 longplay`
+Usage: `yt portal 2 longplay`
 
 Dependencies: [ddgr](https://github.com/jarun/ddgr), [MPV](https://github.com/mpv-player/mpv)
 ```ZSH
@@ -60,8 +61,10 @@ Dependencies: [Spark](https://github.com/holman/spark), [Viu](https://github.com
 
 Configuration: 
 
-* Adjust the dimensions of the album art (the two calls to viu) to ensure a square appearance with your terminal emulator's line spacing
+* Adjust the dimensions of the album art (the two calls to `viu`) to ensure a square appearance with your terminal emulator's line spacing
 * Configure a valid path to album-art.applescript, e.g. ~/Library/Scripts/album-art.applescript
+
+Usage: `np`
 
 ```ZSH
 np() {
@@ -123,5 +126,54 @@ np() {
   paste <(printf %s "$art") <(printf %s "") <(printf %s "") <(printf %s "") <(printf %s "") <(printf '%s\n' "$name" "$artist - $record" "$(echo $currMin:$currSec ⎮'\e[00;36m'${bar:1:1}''${bar:1:1}'\033[0m'⎮ $endMin:$endSec)" "$volIcon $(echo "\e[0;32m$vol\033[0m$volBG")")
   sleep 1
   done
+}
+```
+
+#### Apple Music Snippets
+These snippets are included because I've added columns and sorting to them and because they correlate with my [Now Playing script](#Now-Playing-Apple-Music "Now Playing (Apple Music)").  The shuffle snippets toggle the shuffle feature.  The others list out the contents of some collection in your library. There are many other scripts one could add, such as for modifying playlists or for playback controls.  I prefer to leave those functions to Music.app and to the touch bar/fn keys, respectively.
+
+Configuration: 
+
+* Remove calls to `np` if you don't have my Now Playing script aliased
+
+Usage: `songs`, `records`, `artists`, `playlists`, `record In Rainbows`, `artist Radiohead`, `playlist Radiohead Essentials`, `shuffle`, `noshuffle`
+
+```ZSH
+songs() {
+	osascript -e 'tell application "Music" to get name of every track' | tr "," "\n" | sort | pr -T -a -3
+}
+records() {
+	osascript -e 'tell application "Music" to get album of every track' | tr "," "\n" | sort | awk '!seen[$0]++' | pr -T -a -3
+}
+artists() {
+	osascript -e 'tell application "Music" to get artist of every track' | tr "," "\n" | sort | awk '!seen[$0]++' | pr -T -a -3
+}
+playlists() {
+	osascript -e 'tell application "Music" to get name of playlists' | tr "," "\n" | pr -T -a -3
+}
+record() {
+  	osascript -e 'on run args
+    		tell application "Music" to get name of every track whose album is (item 1 of args)
+  	end' "$*" | tr "," "\n" | sort | awk '!seen[$0]++' | pr -T -a -3  
+}
+artist() {
+	osascript -e 'on run args
+    		tell application "Music" to get name of every track whose artist is (item 1 of args)
+  	end' "$*" | tr "," "\n" | sort | awk '!seen[$0]++' | pr -T -a -3
+}
+playlist() {
+	osascript -e 'on run args
+   		tell application "Music" to get name of every track of playlist (item 1 of args)
+  	end' "$*" | tr "," "\n" | sort | awk '!seen[$0]++' | pr -T -a -3  
+}
+shuffle() {
+  	osascript -e 'on run
+		tell application "Music" to set shuffle enabled to true
+	end'
+}
+noshuffle() {
+  	osascript -e 'on run
+		tell application "Music" to set shuffle enabled to false
+	end'
 }
 ```
