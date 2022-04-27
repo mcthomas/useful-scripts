@@ -6,6 +6,7 @@
 *\*nix*
 
 * [YouTube](#YouTube-without-ads "YouTube (without ads)")
+* [Dice Roll](#Dice-Roll "Dice Roll")
 
 *macOS Only*
 
@@ -50,6 +51,15 @@ yt() {
 	    yt $query
     fi 
 }
+```
+
+### Dice Roll
+Just for fun.
+
+Usage: `dice`
+
+```ZSH
+dice() {dice=(⚀ ⚁ ⚂ ⚃ ⚄ ⚅); printf ${dice[1 + RANDOM % 6]}; printf '%s\n' " ${dice[1 + RANDOM % 6]}"}
 ```
 
 #### Now Playing (Apple Music)
