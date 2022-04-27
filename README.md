@@ -10,6 +10,7 @@
 *macOS Only*
 
 * [Now Playing](#Now-Playing-Apple-Music "Now Playing (Apple Music)")
+* [Listen](#Listen "Listen")
 * [Apple Music Snippets](#Apple-Music-Snippets "Apple Music Snippets")
 
 #### YouTube (without ads)
@@ -126,6 +127,42 @@ np() {
   paste <(printf %s "$art") <(printf %s "") <(printf %s "") <(printf %s "") <(printf %s "") <(printf '%s\n' "$name" "$artist - $record" "$(echo $currMin:$currSec ⎮'\e[00;36m'${bar:1:1}''${bar:1:1}'\033[0m'⎮ $endMin:$endSec)" "$volIcon $(echo "\e[0;32m$vol\033[0m$volBG")")
   sleep 1
   done
+}
+```
+
+#### Listen
+Call this script to begin playback of a specified song, album, songs from a specific artist, or songs from a specific playlist.  This is dictated by the flag you pass.  Unfortunately there is no simple way to play a specific album or songs from a specific artist with Applescript, but I was able to modify code shared by a "jccc" [here](https://discussions.apple.com/thread/1053355), which involves creating a temporary playlist.
+
+Usage: `listen -s House of Cards`, `listen -r In Rainbows`, `listen -a Radiohead`, `listen -p Radiohead Essentials`
+
+```ZSH
+listen() {
+  input=$2
+  if [ $1 = "-s" ] 
+  then
+  	shift
+  	osascript -e 'on run argv
+    	tell application "Music" to play track (item 1 of argv)
+  	end' "$*"
+  	np
+  elif [ $1 = "-r" ] 
+  then
+    	shift
+    	osascript -e 'on run argv' -e 'tell application "Music"' -e 'if (exists playlist "temp_playlist") then' -e 'delete playlist "temp_playlist"' -e 'end if' -e 'set name of (make new playlist) to "temp_playlist"' -e 'set theseTracks to every track of playlist "Library" whose album is (item 1 of argv)' -e 'repeat with thisTrack in theseTracks' -e 'duplicate thisTrack to playlist "temp_playlist"' -e 'end repeat' -e 'play playlist "temp_playlist"' -e 'end tell' -e 'end' "$*"
+    	np
+  elif [ $1 = "-a" ] 
+  then
+    	shift
+    	osascript -e 'on run argv' -e 'tell application "Music"' -e 'if (exists playlist "temp_playlist") then' -e 'delete playlist "temp_playlist"' -e 'end if' -e 'set name of (make new playlist) to "temp_playlist"' -e 'set theseTracks to every track of playlist "Library" whose artist is (item 1 of argv)' -e 'repeat with thisTrack in theseTracks' -e 'duplicate thisTrack to playlist "temp_playlist"' -e 'end repeat' -e 'play playlist "temp_playlist"' -e 'end tell' -e 'end' "$*"
+    	np
+  elif [ $1 = "-p" ]
+  then
+  	shift
+   	osascript -e 'on run argv
+      	tell application "Music" to play playlist (item 1 of argv)
+    	end' "$*"
+    	np
+  fi
 }
 ```
 
