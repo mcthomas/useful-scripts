@@ -1,6 +1,8 @@
 # useful-scripts
 ### Ready for clipboard → .zshrc / .bashrc (or grab the shell scripts)
 
+If you're interested in using or chaining web services from your command line into larger scripts, see https://github.com/chubin/awesome-console-services. 
+
 #### Contents
 
 *\*nix*
@@ -55,7 +57,7 @@ yt() {
 ```
 
 ### Dice Roll
-Just for fun.
+Roll the dice!
 
 Usage: `dice`
 
