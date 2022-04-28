@@ -56,7 +56,7 @@ yt() {
 }
 ```
 
-### Dice Roll
+#### Dice Roll
 Roll the dice!
 
 Usage: `dice`
