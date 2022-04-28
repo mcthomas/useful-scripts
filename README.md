@@ -13,6 +13,7 @@
 * [Now Playing](#Now-Playing-Apple-Music "Now Playing (Apple Music)")
 * [Listen](#Listen-Apple-Music "Listen (Apple Music)")
 * [Apple Music Snippets](#Apple-Music-Snippets "Apple Music Snippets")
+* [Unlocks](#Unlocks "Unlocks")
 
 #### YouTube (without ads)
 Uses DDG w/ params to force YouTube video results from your query, and plays the results you select w/ [MPV](https://github.com/mpv-player/mpv) or continuously queries depending on your subsequent input.  Could easily be reconfigured for use with [Lynx](http://lynx.browser.org), [w3m](http://w3m.sourceforge.net), etc. instead of [ddgr](https://github.com/jarun/ddgr).
@@ -227,4 +228,13 @@ noshuffle() {
 		tell application "Music" to set shuffle enabled to false
 	end'
 }
+```
+
+#### Unlocks
+See if someone unlocked your Mac in the last hour, and when.  Presents a timestamped log message for each occurence.
+
+Usage: `unlocks`
+
+```ZSH
+unlocks() {log show --predicate '(eventMessage CONTAINS "lockUIPresentedWithoutSuccessfulUnlock = NO")' --style syslog --last 1h}
 ```
