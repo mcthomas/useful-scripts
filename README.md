@@ -75,7 +75,7 @@ Dependencies: [Spark](https://github.com/holman/spark), [Viu](https://github.com
 
 Configuration: 
 
-* Adjust the dimensions of the album art (the two calls to `viu`) to ensure a square appearance with your terminal emulator's line spacing
+* Adjust the `-h` dimension of the album art (the two calls to `viu`) to ensure a square appearance with your terminal emulator's line spacing
 * Configure a valid path to album-art.applescript, e.g. ~/Library/Scripts/album-art.applescript
 
 Usage: `np`
@@ -185,10 +185,6 @@ listen() {
 
 #### Apple Music Snippets
 These snippets are included because I've added columns and sorting to them and because they correlate with my [Now Playing script](#Now-Playing-Apple-Music "Now Playing (Apple Music)").  The shuffle snippets toggle the shuffle feature.  The others list out the contents of some collection in your library. There are many other scripts one could add, such as for modifying playlists or for playback controls.  I prefer to leave those functions to Music.app and to the touch bar/fn keys, respectively.
-
-Configuration: 
-
-* Remove calls to `np` if you don't have my Now Playing script aliased
 
 Usage: `songs`, `records`, `artists`, `playlists`, `record In Rainbows`, `artist Radiohead`, `playlist Radiohead Essentials`, `shuffle`, `noshuffle`
 
